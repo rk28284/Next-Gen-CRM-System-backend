@@ -4,9 +4,9 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, password, role, employeeId } = req.body;
   try {
-    const existingUser = await UserModel.findOne({ email });
+    const existingUser = await UserModel.findOne({ username });
 
     if (existingUser) {
       return res.status(400).json({ message: "User  already registered" });
@@ -17,7 +17,12 @@ const registerUser = async (req, res) => {
         return res.status(500).json({ message: "Error hashing password" });
       }
 
-      const user = new UserModel({ username, email, password: hash });
+      const user = new UserModel({
+        username,
+        role,
+        employeeId,
+        password: hash,
+      });
 
       await user.save();
       res.status(201).json({ message: "User  registered successfully", user });
@@ -28,10 +33,10 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ username });
 
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
