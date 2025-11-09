@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 })
  app.use("/api",userRouter);
- //app.use("/api", leadRouter);
+app.use("/api", leadRouter);
 
 app.listen(PORT, async () => {
   console.log("Next-Gen CRM Backend Is Running");
