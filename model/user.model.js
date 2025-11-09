@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema(
       enum: ["Admin", "Manager", "Sales Executive"],
       required: true,
     },
+    employeeId: { type: String, required: true, unique: true },
+    
   },
   { timestamps: true }
 );
