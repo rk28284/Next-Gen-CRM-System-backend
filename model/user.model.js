@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: {
       type: String,
-      enum: ["Admin", "Manager", "Sales Executive"],
       required: true,
     },
     employeeId: { type: String, required: true, unique: true },
