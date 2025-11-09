@@ -1,12 +1,13 @@
-const express = require("express");
-const cors = require("cors")
-const connection = require("./config/db");
+const express =require("express");
+const cors =require("cors")
+const connection =require("./config/db");
 //const connection='mongodb://127.0.0.1:27017/realtime-crypto'
 require("dotenv").config();
-const app = express();
+
+const app =express()
 app.use(express.json());
 
-const PORT = process.env.PORT||8080;
+const PORT =process.env.PORT||8080;
 app.use(cors());
 
 
@@ -22,8 +23,8 @@ app.get("/", (req, res) => {
   }
 
 })
- app.use("/", userRouter);
- app.use("/", leadRouter);
+ app.use("/api",userRouter);
+ //app.use("/api", leadRouter);
 
 app.listen(PORT, async () => {
   console.log("Next-Gen CRM Backend Is Running");
